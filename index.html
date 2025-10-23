@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="skull.png">
   <title>METALINGO</title>
   <style>
     /* テーマ */
@@ -242,6 +243,7 @@
         <button class="btn" id="btnStart">抽選開始</button>
         <button class="btn" id="btnStop" disabled>STOP / 決定</button>
         <button class="btn" id="btnReset">リセット</button>
+        <button class="btn" id="btnBingo">ビンゴ</button>
       </div>
 
       <div class="stage">
@@ -332,7 +334,8 @@
           s.style.opacity = String(1 - p);
           requestAnimationFrame(anim);
         }
-        sparksEl.appendChild(s); requestAnimationFrame(anim);
+        sparksEl.appendChild(s);
+        requestAnimationFrame(anim);
       }
     }
 
@@ -343,10 +346,9 @@
       function start() {
         // すでに再生中なら何もしない
         if (audio && !audio.paused) return;
-
         audio = new Audio("image Pop Step.wav");
-        audio.loop = true;  // ループ再生
         audio.volume = 0.5;
+        audio.loop = true;  // ループ再生
         audio.play().catch(err => console.warn("音声再生エラー:", err));
       }
 
@@ -364,12 +366,16 @@
     const btnStart = $('#btnStart');
     const btnStop = $('#btnStop');
     const btnReset = $('#btnReset');
+    const btnBingo = $('#btnBingo');
 
     btnStart.addEventListener('click', () => {
       if (remain.length === 0) { alert('すべて抽選済みです'); return; }
       if (rollTimer) return;
       statusEl.textContent = '抽選中…';
-      btnStart.disabled = true; btnStop.disabled = false;
+      btnStart.disabled = true;
+      btnStop.disabled = false;
+      btnBingo.disabled = true;
+      btnReset.disabled = true;
       MetalSound.start();
       rollTimer = setInterval(() => {
         const n = remain[Math.floor(Math.random() * remain.length)];
@@ -379,18 +385,30 @@
 
     btnStop.addEventListener('click', () => {
       if (!rollTimer) return;
-      clearInterval(rollTimer); rollTimer = null; MetalSound.stop();
+      clearInterval(rollTimer);
+      rollTimer = null;
+      MetalSound.stop();
       const n = Number(nowNumEl.textContent);
-      const ri = remain.indexOf(n); if (ri > -1) remain.splice(ri, 1);
+      const ri = remain.indexOf(n);
+      if (ri > -1) remain.splice(ri, 1);
       if (!history.includes(n)) history.push(n);
       statusEl.textContent = `決定：${n}（残り ${remain.length}）`;
-      renderPool(); renderHistory(); burstSparks();
-      btnStart.disabled = false; btnStop.disabled = true;
+      renderPool();
+      renderHistory();
+      burstSparks();
+      btnStart.disabled = false;
+      btnStop.disabled = true;
+      btnBingo.disabled = false;
+      btnReset.disabled = false;
     });
 
     btnReset.addEventListener('click', () => {
       if (confirm('リセットしますか？履歴が消えます')) init();
     });
+
+    btnBingo.addEventListener('click', () => {
+      alert("ビンゴおめでとう");
+    })
 
     // 初期化
     init();
