@@ -240,8 +240,7 @@
       <div class="controls" style="margin-bottom:12px">
         <div class="callout">状態：<span id="status">未開始</span></div>
         <div style="flex:1"></div>
-        <button class="btn" id="btnStart">抽選開始</button>
-        <button class="btn" id="btnStop" disabled>STOP / 決定</button>
+        <button class="btn" id="btnStartStop">抽選開始</button> 
         <button class="btn" id="btnReset">リセット</button>
         <button class="btn" id="btnBingo">ビンゴ</button>
       </div>
@@ -376,44 +375,55 @@
     })();
 
     //  ボタン動作 
-    const btnStart = $('#btnStart');
-    const btnStop = $('#btnStop');
-    const btnReset = $('#btnReset');
-    const btnBingo = $('#btnBingo');
+const btnStartStop = $('#btnStartStop');
+const btnReset = $('#btnReset');
+const btnBingo = $('#btnBingo');
 
-    btnStart.addEventListener('click', () => {
-      if (remain.length === 0) { alert('すべて抽選済みです'); return; }
-      if (rollTimer) return;
-      statusEl.textContent = '抽選中…';
-      btnStart.disabled = true;
-      btnStop.disabled = false;
-      btnBingo.disabled = true;
-      btnReset.disabled = true;
-      MetalSound.start();
-      rollTimer = setInterval(() => {
-        const n = remain[Math.floor(Math.random() * remain.length)];
-        nowNumEl.textContent = n; // 候補を高速に表示
-      }, 40);
-    });
+// 状態管理
+let isRolling = false;
 
-    btnStop.addEventListener('click', () => {
-      if (!rollTimer) return;
-      clearInterval(rollTimer);
-      rollTimer = null;
-      MetalSound.stop();
-      const n = Number(nowNumEl.textContent);
-      const ri = remain.indexOf(n);
-      if (ri > -1) remain.splice(ri, 1);
-      if (!history.includes(n)) history.push(n);
-      statusEl.textContent = `決定：${n}（残り ${remain.length}）`;
-      renderPool();
-      renderHistory();
-      burstSparks();
-      btnStart.disabled = false;
-      btnStop.disabled = true;
-      btnBingo.disabled = false;
-      btnReset.disabled = false;
-    });
+// 抽選開始・停止トグル
+btnStartStop.addEventListener('click', () => {
+  if (!isRolling) {
+    // === 抽選開始 ===
+    if (remain.length === 0) {
+      alert('すべて抽選済みです');
+      return;
+    }
+    statusEl.textContent = '抽選中…';
+    btnStartStop.textContent = 'STOP / 決定';
+    btnBingo.disabled = true;
+    btnReset.disabled = true;
+    MetalSound.start();
+
+    rollTimer = setInterval(() => {
+      const n = remain[Math.floor(Math.random() * remain.length)];
+      nowNumEl.textContent = n;
+    }, 40);
+
+    isRolling = true;
+  } else {
+    // === ストップ・決定 ===
+    clearInterval(rollTimer);
+    rollTimer = null;
+    MetalSound.stop();
+
+    const n = Number(nowNumEl.textContent);
+    const ri = remain.indexOf(n);
+    if (ri > -1) remain.splice(ri, 1);
+    if (!history.includes(n)) history.push(n);
+
+    statusEl.textContent = `決定：${n}（残り ${remain.length}）`;
+    renderPool();
+    renderHistory();
+    burstSparks();
+
+    btnStartStop.textContent = '抽選開始';
+    btnBingo.disabled = false;
+    btnReset.disabled = false;
+    isRolling = false;
+  }
+});
 
     btnReset.addEventListener('click', () => {
       if (confirm('リセットしますか？履歴が消えます')) init();
