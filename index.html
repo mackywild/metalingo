@@ -222,6 +222,289 @@
       color: var(--muted);
       font-size: 12px;
     }
+
+    /* —— 景品管理＆モーダル —— */
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 980px) {
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .input,
+    .textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #2b2b36;
+      background: #0e0e14;
+      color: #e5e7eb;
+    }
+
+    .textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .prize-preview {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid #2b2b36;
+      background: #0e0e14;
+    }
+
+    .prize-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .prize-card {
+      border: 1px solid #2b2b36;
+      border-radius: 14px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #17171e, #111118);
+    }
+
+    .prize-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .prize-card .body {
+      padding: 10px 12px;
+    }
+
+    .prize-card .name {
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .prize-card .desc {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #2b2b36;
+      color: #9ca3af;
+      font-size: 12px;
+    }
+
+    /* —— 履歴 —— */
+    .history-wrap {
+      margin-top: 12px;
+    }
+
+    .history-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .h-card {
+      border: 1px solid #2b2b36;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #17171e, #111118);
+    }
+
+    .h-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .h-body {
+      padding: 10px;
+    }
+
+    .h-title {
+      font-weight: 800;
+    }
+
+    .h-sub {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    .badge-num {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #2b2b36;
+      margin-right: 6px;
+    }
+
+    /* —— 選択モーダル／発表オーバーレイ —— */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .dialog {
+      width: min(1000px, 92vw);
+      max-height: 85vh;
+      overflow: auto;
+      background: linear-gradient(180deg, #17171e, #111118);
+      border: 1px solid #2b2b36;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
+    }
+
+    .dialog .head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .picker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .announce {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      background: radial-gradient(900px 600px at 50% -10%, rgba(225, 29, 72, .25), transparent 40%), rgba(0, 0, 0, .8);
+    }
+
+    .announce.show {
+      display: flex;
+    }
+
+    .announce .board {
+      width: min(1100px, 92vw);
+      background: linear-gradient(180deg, #17171e, #0f0f16);
+      border: 2px solid #e11d48;
+      border-radius: 20px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(225, 29, 72, .25);
+    }
+
+    .announce .title {
+      font-family: Impact, Haettenschweiler, "Arial Black", fantasy;
+      font-size: clamp(28px, 5vw, 42px);
+      letter-spacing: .06em;
+      margin-bottom: 10px;
+    }
+
+    .announce img {
+      width: 100%;
+      max-height: 56vh;
+      object-fit: contain;
+      border-radius: 14px;
+      border: 1px solid #2b2b36;
+    }
+
+    .announce .desc {
+      margin-top: 10px;
+      color: #e5e7eb;
+    }
+
+    .announce .hint {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    /* 画像直下メッセージ */
+    .announce .msg {
+      margin-top: 10px;
+      font-weight: 900;
+      font-size: clamp(22px, 3.6vw, 32px);
+      letter-spacing: .06em;
+      color: #fff;
+      text-shadow: 0 0 6px rgba(225, 29, 72, .6), 0 0 20px rgba(162, 28, 175, .35), 0 2px 0 #000;
+      animation: popIn 300ms ease-out;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(.92);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* —— ネタバレ防止サムネ —— */
+    .mystery-thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 12px;
+      border: 1px solid #2b2b36;
+      background:
+        radial-gradient(140% 100% at 30% -10%, rgba(225, 29, 72, .18), transparent 35%),
+        linear-gradient(180deg, #17171e, #111118);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      box-shadow: inset 0 12px 24px rgba(0, 0, 0, .45);
+    }
+
+    .mystery-thumb .q {
+      font-weight: 900;
+      font-size: clamp(24px, 6vw, 44px);
+      letter-spacing: .12em;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(225, 29, 72, .5), 0 2px 0 #000;
+    }
+
+    .mystery-hint {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 6px;
+    }
   </style>
 </head>
 
@@ -240,9 +523,10 @@
       <div class="controls" style="margin-bottom:12px">
         <div class="callout">状態：<span id="status">未開始</span></div>
         <div style="flex:1"></div>
-        <button class="btn" id="btnStartStop">抽選開始</button> 
+        <button class="btn" id="btnStartStop">抽選開始</button>
         <button class="btn" id="btnReset">リセット</button>
         <button class="btn" id="btnBingo">ビンゴ</button>
+        <button class="btn" id="System">管理者</button>
       </div>
 
       <div class="stage">
@@ -263,11 +547,80 @@
         </div>
       </div>
     </section>
+    <section class="panel" id="prizeAdmin" hidden="hidden">
+      <div class="row" style="justify-content:space-between; margin-bottom:10px;">
+        <div class="callout">景品管理</div>
+        <div class="row" style="gap:8px">
+          <span class="badge" id="prizeCountBadge">0/30</span>
+          <button class="btn" id="pzRevealReset" type="button" title="公開状態だけ初期化">
+            画像公開リセット
+          </button>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <div>
+          <label>景品名</label>
+          <input id="pzName" class="input" placeholder="例）特賞：高級コーヒーメーカー">
+          <label style="margin-top:8px; display:block;">説明</label>
+          <textarea id="pzDesc" class="textarea" placeholder="仕様や魅力、受け取り方法など"></textarea>
+
+          <div class="row" style="margin-top:8px;">
+            <input id="pzImgUrl" class="input" placeholder="画像URL（任意。下のファイルとどちらか）">
+          </div>
+          <div class="row" style="margin-top:6px;">
+            <input id="pzImgFile" type="file" accept="image/*">
+            <button class="btn" id="pzRegBtn" type="button">登録</button>
+            <button class="btn" id="pzClearBtn" type="button" title="全削除">全削除</button>
+          </div>
+
+          <img id="pzPreview" class="prize-preview" alt="プレビュー" style="margin-top:8px;">
+        </div>
+
+        <div hidden="hidden">
+          <div class="callout">登録済み</div>
+          <div id="prizeList" class="prize-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 景品選択モーダル -->
+    <div id="prizePicker" class="modal" aria-hidden="true">
+      <div class="dialog">
+        <div class="head">
+          <div class="callout">当選景品を選択</div>
+          <button class="btn" id="pickerClose" type="button">閉じる</button>
+        </div>
+        <div id="pickerGrid" class="picker-grid"></div>
+      </div>
+    </div>
+
+    <!-- 発表オーバーレイ -->
+    <div id="prizeAnnounce" class="announce" aria-hidden="true">
+      <div class="board">
+        <div class="title">🎉 当選おめでとう！ 🎉</div>
+        <img id="announceImg" alt="景品画像">
+        <div id="announceMsg" class="msg">当選おめでとう！</div> <!-- 画像直下メッセージ -->
+        <div id="announceName" class="title" style="margin-top:10px; font-size: clamp(22px,4vw,32px);"></div>
+        <div id="announceDesc" class="desc"></div>
+        <div class="hint">（クリック/ESCで閉じる）</div>
+      </div>
+    </div>
+
+    <!-- 当選履歴 -->
+    <section class="panel" id="prizeHistoryPanel" hidden="hidden">
+      <div class="row" style="justify-content:space-between; margin-bottom:10px;">
+        <div class="callout">当選履歴</div>
+        <div class="history-actions">
+          <button class="btn" id="histClear" type="button">全クリア</button>
+        </div>
+      </div>
+      <div class="history-wrap">
+        <div id="historyGridPrize" class="history-grid"></div>
+      </div>
+    </section>
     <div style="height:24px">
-      <form
-        action="https://formspree.io/f/xkgpzvnb"
-        method="POST"
-      >
+      <form action="https://formspree.io/f/xkgpzvnb" method="POST">
         <label>
           欲しい機能や改善点を教えてください:
           <textarea name="message"></textarea>
@@ -295,6 +648,7 @@
     // 状態
     const MODE = 75;
     let pool = [], remain = [], history = [], rollTimer = null;
+    let sysFlg = false;
 
     // 初期化
     function init() {
@@ -305,7 +659,11 @@
       renderPool();
       renderHistory();
       statusEl.textContent = '未開始';
-      $('#btnStop').disabled = true; $('#btnStart').disabled = false;
+      // $('#btnStop').disabled = true; $('#btnStart').disabled = false;
+      btnStartStop.textContent = '抽選開始';
+      btnStartStop.disabled = false;
+      btnBingo.disabled = false;
+      btnReset.disabled = false;
     }
 
     // プール描画
@@ -375,66 +733,338 @@
     })();
 
     //  ボタン動作 
-const btnStartStop = $('#btnStartStop');
-const btnReset = $('#btnReset');
-const btnBingo = $('#btnBingo');
+    const btnStartStop = $('#btnStartStop');
+    const btnReset = $('#btnReset');
+    const btnBingo = $('#btnBingo');
+    const btnSystem = $('#System');
 
-// 状態管理
-let isRolling = false;
+    // 状態管理
+    let isRolling = false;
+    let lastDecided = null; // 履歴用に確定番号を保持
 
-// 抽選開始・停止トグル
-btnStartStop.addEventListener('click', () => {
-  if (!isRolling) {
-    // === 抽選開始 ===
-    if (remain.length === 0) {
-      alert('すべて抽選済みです');
-      return;
-    }
-    statusEl.textContent = '抽選中…';
-    btnStartStop.textContent = 'STOP / 決定';
-    btnBingo.disabled = true;
-    btnReset.disabled = true;
-    MetalSound.start();
 
-    rollTimer = setInterval(() => {
-      const n = remain[Math.floor(Math.random() * remain.length)];
-      nowNumEl.textContent = n;
-    }, 40);
+    // 抽選開始・停止トグル
+    btnStartStop.addEventListener('click', () => {
+      if (!isRolling) {
+        // === 抽選開始 ===
+        if (remain.length === 0) {
+          alert('すべて抽選済みです');
+          return;
+        }
+        statusEl.textContent = '抽選中…';
+        btnStartStop.textContent = 'STOP / 決定';
+        btnBingo.disabled = true;
+        btnReset.disabled = true;
+        MetalSound.start();
 
-    isRolling = true;
-  } else {
-    // === ストップ・決定 ===
-    clearInterval(rollTimer);
-    rollTimer = null;
-    MetalSound.stop();
+        rollTimer = setInterval(() => {
+          const n = remain[Math.floor(Math.random() * remain.length)];
+          nowNumEl.textContent = n;
+        }, 40);
 
-    const n = Number(nowNumEl.textContent);
-    const ri = remain.indexOf(n);
-    if (ri > -1) remain.splice(ri, 1);
-    if (!history.includes(n)) history.push(n);
+        isRolling = true;
+      } else {
+        // === ストップ・決定 ===
+        clearInterval(rollTimer);
+        rollTimer = null;
+        MetalSound.stop();
 
-    statusEl.textContent = `決定：${n}（残り ${remain.length}）`;
-    renderPool();
-    renderHistory();
-    burstSparks();
+        const n = Number(nowNumEl.textContent);
+        lastDecided = n;
+        const ri = remain.indexOf(n);
+        if (ri > -1) remain.splice(ri, 1);
+        if (!history.includes(n)) history.push(n);
 
-    btnStartStop.textContent = '抽選開始';
-    btnBingo.disabled = false;
-    btnReset.disabled = false;
-    isRolling = false;
-  }
-});
+        statusEl.textContent = `決定：${n}（残り ${remain.length}）`;
+        renderPool();
+        renderHistory();
+        burstSparks();
+
+        btnStartStop.textContent = '抽選開始';
+        btnBingo.disabled = false;
+        btnReset.disabled = false;
+        isRolling = false;
+      }
+    });
 
     btnReset.addEventListener('click', () => {
       if (confirm('リセットしますか？履歴が消えます')) init();
     });
 
-    btnBingo.addEventListener('click', () => {
-      alert("ビンゴおめでとう");
+    btnBingo.addEventListener('click', () => { })
+
+    btnSystem.addEventListener('click', () => {
+      if (sysFlg == false) {
+        document.getElementById("prizeAdmin").hidden = false;
+        document.getElementById("prizeHistoryPanel").hidden = false;
+        sysFlg = true;
+
+      } else {
+        document.getElementById("prizeAdmin").hidden = true;
+        document.getElementById("prizeHistoryPanel").hidden = true;
+        sysFlg = false;
+      }
+
     })
 
-    // 初期化
+    /* ===== 景品登録＋選択発表＋履歴 ===== */
+    const MAX_PRIZES = 30;
+    const PRIZE_KEY = 'metalingo_prizes_v1';
+    const PRIZE_HIST_KEY = 'metalingo_prize_history_v1';
+
+    // 管理UI
+    const prizeCountBadge = document.getElementById('prizeCountBadge');
+    const prizeListEl = document.getElementById('prizeList');
+    const pzName = document.getElementById('pzName');
+    const pzDesc = document.getElementById('pzDesc');
+    const pzImgUrl = document.getElementById('pzImgUrl');
+    const pzImgFile = document.getElementById('pzImgFile');
+    const pzPreview = document.getElementById('pzPreview');
+    const pzRegBtn = document.getElementById('pzRegBtn');
+    const pzClearBtn = document.getElementById('pzClearBtn');
+
+    // モーダル＆発表
+    const prizePicker = document.getElementById('prizePicker');
+    const pickerGrid = document.getElementById('pickerGrid');
+    const pickerClose = document.getElementById('pickerClose');
+    const announceEl = document.getElementById('prizeAnnounce');
+    const announceImg = document.getElementById('announceImg');
+    const announceMsg = document.getElementById('announceMsg');
+    const announceName = document.getElementById('announceName');
+    const announceDesc = document.getElementById('announceDesc');
+
+    // 履歴UI
+    const historyGridPrize = document.getElementById('historyGridPrize');
+    const histClear = document.getElementById('histClear');
+
+    // util
+    function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
+    function fmtTime(ts) { const d = new Date(ts); return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`; }
+
+    // storage
+    function loadPrizes() { try { return JSON.parse(localStorage.getItem(PRIZE_KEY) || '[]'); } catch { return []; } }
+    function savePrizes(arr) { localStorage.setItem(PRIZE_KEY, JSON.stringify(arr)); }
+    function loadHist() { try { return JSON.parse(localStorage.getItem(PRIZE_HIST_KEY) || '[]'); } catch { return []; } }
+    function saveHist(arr) { localStorage.setItem(PRIZE_HIST_KEY, JSON.stringify(arr)); }
+
+    // 安全要素生成（XSS軽減）
+    function el(tag, props = {}, children = []) {
+      const d = document.createElement(tag);
+      for (const [k, v] of Object.entries(props)) {
+        if (k === 'text') d.textContent = v;
+        else if (k === 'src') d.setAttribute('src', v);
+        else d.setAttribute(k, v);
+      }
+      children.forEach(c => d.appendChild(c));
+      return d;
+    }
+
+    function cardForPrizeList(p) {
+      const img = p.img ? el('img', { src: p.img, alt: '' }) : null;
+      if (img) img.onerror = () => img.remove();
+      const name = el('div', { class: 'name', text: p.name });
+      const desc = el('div', { class: 'desc', text: p.desc || '' });
+      const del = el('button', { class: 'btn' }, []); del.textContent = '削除';
+      del.addEventListener('click', () => { savePrizes(loadPrizes().filter(x => x.id !== p.id)); renderPrizeList(); });
+      const row = el('div', { class: 'row' }, [del]);
+      const body = el('div', { class: 'body' }, [name, desc, row]);
+      const card = el('div', { class: 'prize-card' }, []);
+      if (img) card.appendChild(img);
+      card.appendChild(body);
+      return card;
+    }
+
+    function renderPrizeList() {
+      // ★ revealed 未定義なら false に揃える(旧データ移行)
+      const normalized = loadPrizes().map(p => ({ revealed: false, ...p }));
+      savePrizes(normalized);
+
+      const prizes = normalized;
+      prizeListEl.innerHTML = '';
+      prizes.forEach(p => prizeListEl.appendChild(cardForPrizeList(p)));
+      if (prizeCountBadge) prizeCountBadge.textContent = `${prizes.length}/${MAX_PRIZES}`;
+      pzRegBtn.disabled = prizes.length >= MAX_PRIZES;
+    }
+
+    function updatePreview() {
+      const url = pzImgUrl.value.trim();
+      const file = pzImgFile.files && pzImgFile.files[0];
+      if (file) {
+        const r = new FileReader();
+        r.onload = e => pzPreview.src = e.target.result;
+        r.readAsDataURL(file);
+      } else if (url) {
+        pzPreview.src = url;
+      } else {
+        pzPreview.removeAttribute('src');
+      }
+    }
+    pzImgUrl.addEventListener('input', updatePreview);
+    pzImgFile.addEventListener('change', updatePreview);
+
+    pzRegBtn.addEventListener('click', async () => {
+      const prizes = loadPrizes();
+      if (prizes.length >= MAX_PRIZES) { alert(`上限${MAX_PRIZES}件まで`); return; }
+      const name = pzName.value.trim(); if (!name) { alert('景品名は必須'); return; }
+      const desc = pzDesc.value.trim();
+      const url = pzImgUrl.value.trim();
+      const file = pzImgFile.files && pzImgFile.files[0];
+
+      let imgData = '';
+      if (file) {
+        imgData = await new Promise((res, rej) => {
+          const r = new FileReader();
+          r.onload = e => res(e.target.result);
+          r.onerror = rej;
+          r.readAsDataURL(file);
+        });
+      } else if (url) { imgData = url; }
+
+      prizes.push({ id: uid(), name, desc, img: imgData, revealed: false }); // ★追加
+      savePrizes(prizes);
+
+      pzName.value = ''; pzDesc.value = ''; pzImgUrl.value = ''; pzImgFile.value = '';
+      pzPreview.removeAttribute('src');
+      renderPrizeList();
+    });
+
+    pzClearBtn.addEventListener('click', () => {
+      if (!confirm('登録済み景品を全削除します。よろしい？')) return;
+      savePrizes([]); renderPrizeList();
+    });
+
+    // 履歴
+    function renderHist() {
+      const arr = loadHist().slice().reverse();
+      historyGridPrize.innerHTML = '';
+      if (arr.length === 0) {
+        const d = el('div', { class: 'h-sub', text: 'まだ当選履歴はありません。' });
+        historyGridPrize.appendChild(d); return;
+      }
+      arr.forEach(x => {
+        const wrap = el('div', { class: 'h-card' });
+        if (x.img) {
+          const im = el('img', { src: x.img, alt: '' }); im.onerror = () => im.remove();
+          wrap.appendChild(im);
+        }
+        const ttl = el('div', { class: 'h-title' });
+        if (x.num) { ttl.appendChild(el('span', { class: 'badge-num', text: `#${x.num}` })); }
+        ttl.appendChild(document.createTextNode(x.name));
+
+        const meta = el('div', { class: 'h-sub', text: fmtTime(x.ts) });
+        const dsc = x.desc ? el('div', { class: 'h-sub', text: x.desc }) : null;
+        const body = el('div', { class: 'h-body' }, dsc ? [ttl, meta, dsc] : [ttl, meta]);
+        wrap.appendChild(body);
+        historyGridPrize.appendChild(wrap);
+      });
+    }
+    function pushHist(entry) {
+      const arr = loadHist();
+      arr.push(entry);
+      saveHist(arr);
+      renderHist();
+    }
+    histClear.addEventListener('click', () => {
+      if (!confirm('当選履歴をすべて削除します。よろしい？')) return;
+      saveHist([]);
+      renderHist();
+    });
+
+    // モーダル＆発表
+    function openPicker() {
+      const prizes = loadPrizes().map(p => ({ revealed: false, ...p })); // 保険
+      pickerGrid.innerHTML = '';
+      if (prizes.length === 0) {
+        pickerGrid.appendChild(el('div', { style: 'color:#9ca3af', text: '景品がありません。右の「景品管理」から登録してください。' }));
+      } else {
+        prizes.forEach(p => {
+          const card = el('div', { class: 'prize-card' });
+
+          if (p.revealed && p.img) {
+            // ★ 公開済みは本物の画像を出す
+            const im = el('img', { src: p.img, alt: '' }); im.onerror = () => im.remove();
+            card.appendChild(im);
+          } else {
+            // ★ 未公開はネタバレ防止サムネを出す
+            const mystery = el('div', { class: 'mystery-thumb' }, [
+              el('div', { class: 'q', text: '？？？' })
+            ]);
+            card.appendChild(mystery);
+          }
+
+          const name = el('div', { class: 'name', text: p.name });
+          const desc = el('div', { class: 'desc', text: (p.desc || '').slice(0, 80) });
+          const hint = !p.revealed ? el('div', { class: 'mystery-hint', text: '発表まで画像はヒミツ' }) : null;
+
+          const choose = el('button', { class: 'btn' });
+          choose.textContent = 'この景品を発表';
+          choose.addEventListener('click', () => showAnnouncement(p));
+
+          const bodyKids = hint ? [name, desc, hint] : [name, desc];
+          const body = el('div', { class: 'body' }, [...bodyKids, el('div', { class: 'row' }, [choose])]);
+
+          card.appendChild(body);
+          pickerGrid.appendChild(card);
+        });
+      }
+      prizePicker.classList.add('show');
+      prizePicker.setAttribute('aria-hidden', 'false');
+      pickerClose.focus();
+    }
+
+    function closePicker() {
+      prizePicker.classList.remove('show');
+      prizePicker.setAttribute('aria-hidden', 'true');
+    }
+
+    pickerClose.addEventListener('click', closePicker);
+    prizePicker.addEventListener('click', (e) => { if (e.target === prizePicker) closePicker(); });
+
+    function showAnnouncement(prize) {
+      closePicker();
+      announceName.textContent = prize.name;
+      announceDesc.textContent = prize.desc || '';
+      announceMsg.textContent = '当選おめでとう！';
+      if (prize.img) { announceImg.src = prize.img; } else { announceImg.removeAttribute('src'); }
+      announceEl.classList.add('show'); announceEl.setAttribute('aria-hidden', 'false');
+
+      // ★ ここで公開フラグを立てる
+      const arr = loadPrizes();
+      const i = arr.findIndex(x => x.id === prize.id);
+      if (i > -1) { arr[i].revealed = true; savePrizes(arr); }
+
+      // 履歴に記録
+      pushHist({ ts: Date.now(), num: lastDecided, id: prize.id, name: prize.name, desc: prize.desc || '', img: prize.img || '' });
+    }
+    function hideAnnouncement() { announceEl.classList.remove('show'); announceEl.setAttribute('aria-hidden', 'true'); }
+    announceEl.addEventListener('click', hideAnnouncement);
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideAnnouncement(); });
+
+    /* ===== btnBingo の安全バインド（提案①：remove→add） ===== */
+    function onBingoClick() { openPicker(); }
+    function bindBingo() {
+      const el = document.getElementById('btnBingo'); if (!el) return;
+      el.removeEventListener('click', onBingoClick);
+      el.addEventListener('click', onBingoClick, { passive: true });
+    }
+
+    /* 画像公開リセット機能実装*/
+    const pzRevealReset = document.getElementById('pzRevealReset');
+    pzRevealReset.addEventListener('click', () => {
+      if (!confirm('すべての景品の「公開済み」状態をリセットします。よろしい？')) return;
+      const arr = loadPrizes().map(p => ({ ...p, revealed: false }));
+      savePrizes(arr);
+      renderPrizeList();
+      // ピッカーを開いていた場合も反映したいなら再描画
+      if (prizePicker.classList.contains('show')) openPicker();
+    });
+    bindBingo();
     init();
+
+    /* 初期描画（最後に） */
+    renderPrizeList();
+    renderHist();
+
   </script>
 </body>
 
