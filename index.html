@@ -555,6 +555,15 @@
           <button class="btn" id="pzRevealReset" type="button" title="公開状態だけ初期化">
             画像公開リセット
           </button>
+
+          <!--json書き出し -->
+          <button class="btn" id="pzExport" type="button">
+            景品書き出し
+          </button>
+          <label class="btn" for="pzImportFile">
+            読み込み
+          </label>
+          <input type="file" id="pzImportFile" accept="application/json" style="display: none;">
         </div>
       </div>
 
@@ -822,6 +831,8 @@
     const pzPreview = document.getElementById('pzPreview');
     const pzRegBtn = document.getElementById('pzRegBtn');
     const pzClearBtn = document.getElementById('pzClearBtn');
+    const pzExport = document.getElementById('pzExport');
+    const pzImportFile = document.getElementById('pzImportFile');
 
     // モーダル＆発表
     const prizePicker = document.getElementById('prizePicker');
@@ -901,6 +912,59 @@
     }
     pzImgUrl.addEventListener('input', updatePreview);
     pzImgFile.addEventListener('change', updatePreview);
+    pzExport.addEventListener('click', () => {
+      console.log("a")
+      const prizes = loadPrizes();
+
+      if (!prizes.length) {
+        alert("景品がありません");
+        return;
+      }
+      console.log("a")
+
+      const blob = new Blob([JSON.stringify(prizes, null, 2)],
+        { type: 'application/json' }
+      );
+
+      console.log("a")
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `metalingo${Date.now()}.json;`
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    pzImportFile.addEventListener('change', () => {
+      const file = pzImportFile.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const raw = JSON.parse(e.target.result);
+
+          if (!Array.isArray(raw)) {
+            throw new Error('notArray');
+          }
+          const normalized = raw.map(p => ({
+            id: p.id || uid(),
+            name: String(p.name) || "",
+            desc: String(p.desc) || '',
+            img: p.img || '',
+            revealed: !!p.reveraled
+          })).slice(0, MAX_PRIZES);
+
+          savePrizes(normalized);
+          renderPrizeList();
+
+        } catch (err) {
+          console.error(err)
+        } finally {
+          pzImportFile.value = "";
+        }
+      };
+      reader.readAsText(file, 'utf-8');
+    })
 
     pzRegBtn.addEventListener('click', async () => {
       const prizes = loadPrizes();
