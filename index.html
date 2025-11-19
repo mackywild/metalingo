@@ -7,7 +7,6 @@
   <link rel="icon" type="image/png" href="skull.png">
   <title>METALINGO</title>
   <style>
-    /* テーマ */
     :root {
       --bg: #0b0b0f;
       --accent: #e11d48;
@@ -24,9 +23,7 @@
       margin: 0;
       font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
       color: var(--ink);
-      background: radial-gradient(1200px 800px at 70% -10%, #2b0008 0%, transparent 40%),
-        radial-gradient(900px 600px at 20% 120%, #18041d 0%, transparent 50%),
-        linear-gradient(180deg, #0a0a0d 0%, #050507 100%);
+      background: radial-gradient(1200px 800px at 70% -10%, #2b0008 0%, transparent 40%), radial-gradient(900px 600px at 20% 120%, #18041d 0%, transparent 50%), linear-gradient(180deg, #0a0a0d 0%, #050507 100%);
       background-color: var(--bg);
       overflow-x: hidden;
     }
@@ -482,9 +479,7 @@
       aspect-ratio: 4/3;
       border-radius: 12px;
       border: 1px solid #2b2b36;
-      background:
-        radial-gradient(140% 100% at 30% -10%, rgba(225, 29, 72, .18), transparent 35%),
-        linear-gradient(180deg, #17171e, #111118);
+      background: radial-gradient(140% 100% at 30% -10%, rgba(225, 29, 72, .18), transparent 35%), linear-gradient(180deg, #17171e, #111118);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -505,10 +500,225 @@
       color: #9ca3af;
       margin-top: 6px;
     }
+
+    .start-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 20000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(900px 600px at 50% -10%, rgba(225, 29, 72, .45), transparent 45%), rgba(0, 0, 0, 0.9);
+      transition: opacity 0.6s ease;
+      opacity: 1;
+    }
+
+    .start-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ===== スタートメニュー用 楽器デコ ===== */
+    .start-inner {
+      position: relative;
+      text-align: center;
+      padding: 32px 24px;
+      border-radius: 24px;
+      border: 1px solid #4b1020;
+      background: radial-gradient(600px 400px at 50% 0%, rgba(225, 29, 72, .18), transparent 60%),
+        linear-gradient(180deg, #15151d, #090910);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .8);
+      max-width: 520px;
+      width: 90%;
+      z-index: 2;
+    }
+
+
+    .start-title {
+      font-family: Impact, Haettenschweiler, "Arial Black", fantasy;
+      font-size: clamp(40px, 9vw, 72px);
+      letter-spacing: .16em;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(225, 29, 72, .8), 0 0 30px rgba(162, 28, 175, .6), 0 4px 0 #000;
+      transform: translateY(-150%);
+      opacity: 0;
+    }
+
+    .start-title.drop-in {
+      animation: titleDrop 0.9s cubic-bezier(.2, .9, .3, 1.2) forwards;
+    }
+
+    @keyframes titleDrop {
+      0% {
+        transform: translateY(-150%);
+        opacity: 0;
+      }
+
+      60% {
+        transform: translateY(10%);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .start-subtitle {
+      margin-top: 8px;
+      font-size: 12px;
+      letter-spacing: .3em;
+      color: var(--muted);
+    }
+
+    .start-btn {
+      margin-top: 24px;
+      padding-inline: 32px;
+      font-size: 14px;
+    }
+
+    .start-hint {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+
+    .start-deco {
+      position: absolute;
+      font-size: clamp(40px, 7vw, 70px);
+      opacity: 0.9;
+      pointer-events: none;
+      filter:
+        drop-shadow(0 0 8px rgba(225, 29, 72, .9)) drop-shadow(0 0 18px rgba(0, 0, 0, 1));
+      animation: decoFloat 3.8s ease-in-out infinite;
+    }
+
+    /* 左下ギター */
+    .deco-gtr-left {
+      left: 5%;
+      bottom: 12%;
+      transform: rotate(-18deg);
+      animation-delay: 0s;
+    }
+
+    /* 右下ギター */
+    .deco-gtr-right {
+      right: 6%;
+      bottom: 14%;
+      transform: rotate(16deg);
+      animation-delay: 0.8s;
+    }
+
+    /* 左上ドラム */
+    .deco-drums-left {
+      left: 10%;
+      top: 12%;
+      transform: rotate(-8deg);
+      font-size: clamp(34px, 6vw, 60px);
+      animation-delay: 1.4s;
+    }
+
+    /* 右上ドラム */
+    .deco-drums-right {
+      right: 12%;
+      top: 10%;
+      transform: rotate(10deg);
+      font-size: clamp(34px, 6vw, 60px);
+      animation-delay: 2.1s;
+    }
+
+    /* 上中央マイク（ボーカル） */
+    .deco-mic {
+      left: 50%;
+      top: 4%;
+      transform: translateX(-50%) rotate(-5deg);
+      font-size: clamp(32px, 5.5vw, 56px);
+      animation-delay: 2.8s;
+    }
+
+    @keyframes decoFloat {
+      0% {
+        transform: translateY(0) scale(1) rotate(var(--rot, 0deg));
+        opacity: 0.85;
+      }
+
+      50% {
+        transform: translateY(-8px) scale(1.03) rotate(var(--rot, 0deg));
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(0) scale(1) rotate(var(--rot, 0deg));
+        opacity: 0.9;
+      }
+    }
+
+    /* ===== プロジェクターモード（大画面用スケール） ===== */
+    body.projector {
+      font-size: 18px;
+      /* 全体のベース文字をちょい大きく */
+    }
+
+    /* ボタンもデカく */
+    body.projector .btn {
+      padding: 16px 26px;
+      font-size: 16px;
+      border-radius: 18px;
+    }
+
+    /* 現在のボール数字をさらにデカく */
+    body.projector .now {
+      font-size: clamp(90px, 18vw, 240px);
+      min-height: 260px;
+    }
+
+    /* タイトルもデカく */
+    body.projector .title {
+      font-size: clamp(36px, 6vw, 70px);
+    }
+
+    /* スタート画面タイトルもデカく */
+    body.projector .start-title {
+      font-size: clamp(40px, 9vw, 90px);
+    }
+
+    /* 履歴の玉も少し大きめに */
+    body.projector .history .ball {
+      font-size: 26px;
+    }
+
+    /* 抽選プールのマスも見やすく */
+    body.projector .grid .cell {
+      font-size: 18px;
+    }
   </style>
 </head>
 
 <body>
+  <div id="startScreen" class="start-screen">
+    <!-- メタル楽器デコ -->
+    <div class="start-deco deco-gtr-left">🎸</div>
+    <div class="start-deco deco-gtr-right">🎸</div>
+    <div class="start-deco deco-drums-left">🥁</div>
+    <div class="start-deco deco-drums-right">🥁</div>
+    <div class="start-deco deco-mic">🎤</div>
+
+    <div class="start-inner">
+      <div id="startTitle" class="start-title">
+        METALINGO
+      </div>
+      <div class="start-subtitle">
+        METAL BINGO GAME
+      </div>
+      <div><button class="btn" id="btnProjector">プロジェクターサイズ</button></div>
+      <button id="btnGameStart" class="btn start-btn" type="button">
+        GAME START
+      </button>
+
+    </div>
+  </div>
   <header>
     <div class="logo">
       <img src="skull.png" alt="Skull Logo" class="skull">
@@ -527,6 +737,7 @@
         <button class="btn" id="btnReset">リセット</button>
         <button class="btn" id="btnBingo">ビンゴ</button>
         <button class="btn" id="System">管理者</button>
+
       </div>
 
       <div class="stage">
@@ -544,6 +755,34 @@
         <div>
           <div class="callout">抽選プール</div>
           <div class="grid" id="pool"></div>
+        </div>
+      </div>
+    </section>
+    <section class="panel" id="bgmPanel">
+      <div class="callout" style="margin-bottom:8px;">BGMコントロール</div>
+
+      <div class="row" style="margin-bottom:8px;">
+        <select id="bgmTrack" class="input" style="max-width:260px;">
+          <!-- JS で曲名を埋める -->
+        </select>
+        <button class="btn" id="bgmPlay" type="button">▶ 再生 / 一時停止</button>
+        <button class="btn" id="bgmPrev" type="button">◀ 前</button>
+        <button class="btn" id="bgmNext" type="button">次 ▶</button>
+      </div>
+
+      <div class="row">
+        <div style="flex:1; min-width:200px;">
+          <div class="h-sub" style="font-size:12px; margin-bottom:4px;">音量</div>
+          <input id="bgmVolume" type="range" min="0" max="1" step="0.01" value="0.5" style="width:100%;">
+        </div>
+
+        <div style="min-width:180px;">
+          <div class="h-sub" style="font-size:12px; margin-bottom:4px;">再生モード</div>
+          <select id="bgmMode" class="input">
+            <option value="single">単曲ループ</option>
+            <option value="order">順番に再生</option>
+            <option value="shuffle">シャッフル再生</option>
+          </select>
         </div>
       </div>
     </section>
@@ -614,6 +853,16 @@
         <div id="announceDesc" class="desc"></div>
         <div class="hint">（クリック/ESCで閉じる）</div>
       </div>
+      <div id="winnerArea" style="margin-top:12px;">
+        <label for="winnerName" class="h-sub" style="display:block; margin-bottom:4px;">
+          誰が獲得したか（任意で記録）
+        </label>
+        <div class="row">
+          <input id="winnerName" class="input" placeholder="例）山田さん / 3列目左端の方">
+          <button class="btn" id="winnerSave" type="button">記録</button>
+        </div>
+        <div id="winnerStatus" class="h-sub" style="margin-top:4px;"></div>
+      </div>
     </div>
 
     <!-- 当選履歴 -->
@@ -627,17 +876,18 @@
       <div class="history-wrap">
         <div id="historyGridPrize" class="history-grid"></div>
       </div>
+      <div style="height:24px">
+        <form action="https://formspree.io/f/xkgpzvnb" method="POST">
+          <label>
+            欲しい機能や改善点を教えてください:
+            <textarea name="message"></textarea>
+          </label>
+          <!-- your other form fields go here -->
+          <button type="submit">送信</button>
+        </form>
+      </div>
     </section>
-    <div style="height:24px">
-      <form action="https://formspree.io/f/xkgpzvnb" method="POST">
-        <label>
-          欲しい機能や改善点を教えてください:
-          <textarea name="message"></textarea>
-        </label>
-        <!-- your other form fields go here -->
-        <button type="submit">送信</button>
-      </form>
-    </div>
+
   </main>
 
   <footer>Creater:Mackywild 2025「Metal Never Die」</footer>
@@ -720,21 +970,269 @@
 
     // ミュージック(今回は自作ポップスで挙動のみ検証) 
     const MetalSound = (() => {
-      let audio;
+      // ★ ここに曲を10曲まで増やしていく
+      //    file は実際のパスに合わせて書き換えてね
+      const tracks = [
+        { id: 'popstep', title: 'Pop Step（デフォルト）', file: 'image Pop Step.wav' },
+        { id: 'miAmore', title: 'mi Amore', file: 'mi Amore.mp3' },
+        { id: 'track3', title: 'Track 3', file: 'image Pop Step.wav' },
+        // …必要に応じて追加（最大10曲くらい）
+      ];
 
-      function start() {
-        // すでに再生中なら何もしない
-        if (audio && !audio.paused) return;
-        audio = new Audio("image Pop Step.wav");
-        audio.volume = 0.5;
-        audio.loop = true;  // ループ再生
-        audio.play().catch(err => console.warn("音声再生エラー:", err));
+      let audio = null;
+      let currentIndex = 0;
+      let mode = 'single';  // 'single' | 'order' | 'shuffle'
+      let volume = 0.5;
+      let isPlaying = false;
+
+      function ensureAudio(idx = currentIndex) {
+        if (!tracks.length) return;
+
+        // 同じ曲なら使い回し
+        const src = tracks[idx].file;
+        if (!audio || !audio._srcId || audio._srcId !== src) {
+          if (audio) {
+            audio.pause();
+          }
+          audio = new Audio(src);
+          audio._srcId = src;
+          audio.volume = volume;
+          audio.loop = (mode === 'single');
+          audio.onended = handleEnded;
+        } else {
+          audio.loop = (mode === 'single');
+          audio.volume = volume;
+          audio.onended = handleEnded;
+        }
+      }
+
+      function handleEnded() {
+        if (!tracks.length) return;
+
+        if (mode === 'single') {
+          // 単曲ループ
+          audio.currentTime = 0;
+          audio.play().catch(() => { });
+        } else if (mode === 'order') {
+          // 順番に再生
+          currentIndex = (currentIndex + 1) % tracks.length;
+          ensureAudio();
+          audio.play().catch(() => { });
+          syncUI();
+        } else if (mode === 'shuffle') {
+          // シャッフル（同じ曲を連続で避ける）
+          if (tracks.length > 1) {
+            let next = currentIndex;
+            while (next === currentIndex) {
+              next = Math.floor(Math.random() * tracks.length);
+            }
+            currentIndex = next;
+          }
+          ensureAudio();
+          audio.play().catch(() => { });
+          syncUI();
+        }
+      }
+
+      function play() {
+        if (!tracks.length) return;
+        ensureAudio();
+        audio.play()
+          .then(() => { isPlaying = true; syncUI(); })
+          .catch(err => console.warn('BGM再生エラー:', err));
       }
 
       function stop() {
         if (audio) {
-          audio.pause();   // 停止
-          audio.currentTime = 0; // 再生位置をリセット
+          audio.pause();
+          audio.currentTime = 0;
+        }
+        isPlaying = false;
+        syncUI();
+      }
+
+      function toggle() {
+        if (isPlaying) stop(); else play();
+      }
+
+      function setVolume(v) {
+        volume = v;
+        if (audio) audio.volume = v;
+      }
+
+      function setMode(m) {
+        mode = m;
+        if (audio) audio.loop = (mode === 'single');
+      }
+
+      function select(index) {
+        if (index < 0 || index >= tracks.length) return;
+        currentIndex = index;
+        if (isPlaying) {
+          ensureAudio();
+          audio.play().catch(() => { });
+        } else {
+          ensureAudio();
+        }
+        syncUI();
+      }
+
+      function next() {
+        if (!tracks.length) return;
+        currentIndex = (currentIndex + 1) % tracks.length;
+        if (isPlaying) {
+          ensureAudio();
+          audio.play().catch(() => { });
+        } else {
+          ensureAudio();
+        }
+        syncUI();
+      }
+
+      function prev() {
+        if (!tracks.length) return;
+        currentIndex = (currentIndex - 1 + tracks.length) % tracks.length;
+        if (isPlaying) {
+          ensureAudio();
+          audio.play().catch(() => { });
+        } else {
+          ensureAudio();
+        }
+        syncUI();
+      }
+
+      function getTracks() {
+        return tracks.slice();
+      }
+
+      function getState() {
+        return { currentIndex, mode, volume, isPlaying };
+      }
+
+      // 既存の抽選開始ボタンから呼ばれているAPIを維持
+      function start() {
+        play();
+      }
+
+      // ===== UI 同期用（後でフックを渡す） =====
+      let uiSyncHandlers = [];
+
+      function registerUISync(handler) {
+        uiSyncHandlers.push(handler);
+      }
+
+      function syncUI() {
+        const state = getState();
+        uiSyncHandlers.forEach(fn => fn(state, tracks));
+      }
+
+      return {
+        // 旧API
+        start,
+        stop,
+        // 新API
+        toggle,
+        setVolume,
+        setMode,
+        select,
+        next,
+        prev,
+        getTracks,
+        getState,
+        registerUISync
+      };
+    })();
+
+    // ===== BGM コントロール初期化 =====
+    function initBgmControls() {
+      const sel = document.getElementById('bgmTrack');
+      const btnPlay = document.getElementById('bgmPlay');
+      const btnNext = document.getElementById('bgmNext');
+      const btnPrev = document.getElementById('bgmPrev');
+      const vol = document.getElementById('bgmVolume');
+      const mode = document.getElementById('bgmMode');
+
+      if (!sel || !btnPlay || !vol || !mode) return;
+
+      // 曲リストをセレクトに表示
+      const tracks = MetalSound.getTracks();
+      sel.innerHTML = '';
+      tracks.forEach((t, i) => {
+        const opt = document.createElement('option');
+        opt.value = String(i);
+        opt.textContent = t.title || `Track ${i + 1}`;
+        sel.appendChild(opt);
+      });
+
+      // イベント
+      sel.addEventListener('change', () => {
+        const idx = Number(sel.value);
+        MetalSound.select(idx);
+      });
+
+      btnPlay.addEventListener('click', () => {
+        MetalSound.toggle();
+      });
+
+      btnNext.addEventListener('click', () => {
+        MetalSound.next();
+      });
+
+      btnPrev.addEventListener('click', () => {
+        MetalSound.prev();
+      });
+
+      vol.addEventListener('input', () => {
+        MetalSound.setVolume(Number(vol.value));
+      });
+
+      mode.addEventListener('change', () => {
+        MetalSound.setMode(mode.value);
+      });
+
+      // プレイヤー → UI への同期
+      MetalSound.registerUISync((state) => {
+        if (sel && String(state.currentIndex) !== sel.value) {
+          sel.value = String(state.currentIndex);
+        }
+        if (mode && mode.value !== state.mode) {
+          mode.value = state.mode;
+        }
+        if (vol && Number(vol.value) !== state.volume) {
+          vol.value = String(state.volume);
+        }
+        if (btnPlay) {
+          btnPlay.textContent = state.isPlaying ? '⏸ 一時停止' : '▶ 再生';
+        }
+      });
+
+      // 初期状態同期
+      const st = MetalSound.getState();
+      vol.value = String(st.volume);
+      mode.value = st.mode;
+      sel.value = String(st.currentIndex);
+    }
+
+
+
+    // オープニングBGM
+    const OpeningSound = (() => {
+      let audio;
+
+      function start() {
+        if (!audio) {
+          // ★好きなオープニング音源に差し替えてね
+          audio = new Audio("opening_theme.mp3");
+          audio.loop = true;
+        }
+        audio.currentTime = 0;
+        audio.volume = 0.8;
+        audio.play().catch(err => console.warn("オープニング音声再生エラー:", err));
+      }
+
+      function stop() {
+        if (audio) {
+          audio.pause();
         }
       }
 
@@ -746,10 +1244,41 @@
     const btnReset = $('#btnReset');
     const btnBingo = $('#btnBingo');
     const btnSystem = $('#System');
+    const btnProjector = $('#btnProjector');
+
+    const startScreen = document.getElementById('startScreen');
+    const startTitle = document.getElementById('startTitle');
+    const btnGameStart = document.getElementById('btnGameStart');
+
+    // スタートボタン：オープニング演出 → メインへ
+    btnGameStart.addEventListener('click', () => {
+      // 連打防止
+      btnGameStart.disabled = true;
+      btnGameStart.textContent = 'LOADING...';
+
+      // クリックをトリガにオープニングBGM開始
+      OpeningSound.start();
+
+      // タイトル落下アニメ開始
+      startTitle.classList.add('drop-in');
+
+      // 少し時間を置いてからメイン画面へフェードアウト
+      setTimeout(() => {
+        startScreen.classList.add('fade-out');
+        // BGMは消してもいいし、そのまま流し続けてもよい
+        OpeningSound.stop();
+
+        // フェードが終わったらDOMから隠す
+        setTimeout(() => {
+          startScreen.style.display = 'none';
+        }, 700);
+      }, 2200); // タイトルが落ちきるくらいの時間
+    });
 
     // 状態管理
     let isRolling = false;
     let lastDecided = null; // 履歴用に確定番号を保持
+    let currentHistIndex = null;
 
 
     // 抽選開始・停止トグル
@@ -815,6 +1344,14 @@
       }
 
     })
+    // プロジェクターモード トグル
+    if (btnProjector) {
+      btnProjector.addEventListener('click', () => {
+        document.body.classList.toggle('projector');
+        const on = document.body.classList.contains('projector');
+        btnProjector.textContent = on ? '通常サイズ' : 'プロジェクターサイズ';
+      });
+    }
 
     /* ===== 景品登録＋選択発表＋履歴 ===== */
     const MAX_PRIZES = 30;
@@ -843,6 +1380,10 @@
     const announceMsg = document.getElementById('announceMsg');
     const announceName = document.getElementById('announceName');
     const announceDesc = document.getElementById('announceDesc');
+
+    const winnerNameInput = document.getElementById('winnerName');
+    const winnerSaveBtn = document.getElementById('winnerSave');
+    const winnerStatus = document.getElementById('winnerStatus');
 
     // 履歴UI
     const historyGridPrize = document.getElementById('historyGridPrize');
@@ -929,7 +1470,7 @@
       console.log("a")
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = `metalingo${Date.now()}.json;`
+      a.download = `metalingo${Date.now()}.json`;
       a.click();
       URL.revokeObjectURL(a.href);
     });
@@ -1017,7 +1558,13 @@
 
         const meta = el('div', { class: 'h-sub', text: fmtTime(x.ts) });
         const dsc = x.desc ? el('div', { class: 'h-sub', text: x.desc }) : null;
-        const body = el('div', { class: 'h-body' }, dsc ? [ttl, meta, dsc] : [ttl, meta]);
+        const win = x.winner ? el('div', { class: 'h-sub', text: `獲得者：${x.winner}` }) : null;
+
+        const kids = [ttl, meta];
+        if (dsc) kids.push(dsc);
+        if (win) kids.push(win);
+
+        const body = el('div', { class: 'h-body' }, kids);
         wrap.appendChild(body);
         historyGridPrize.appendChild(wrap);
       });
@@ -1027,6 +1574,7 @@
       arr.push(entry);
       saveHist(arr);
       renderHist();
+      return arr.length - 1;
     }
     histClear.addEventListener('click', () => {
       if (!confirm('当選履歴をすべて削除します。よろしい？')) return;
@@ -1045,11 +1593,11 @@
           const card = el('div', { class: 'prize-card' });
 
           if (p.revealed && p.img) {
-            // ★ 公開済みは本物の画像を出す
+            // 公開済みは本物の画像を出す
             const im = el('img', { src: p.img, alt: '' }); im.onerror = () => im.remove();
             card.appendChild(im);
           } else {
-            // ★ 未公開はネタバレ防止サムネを出す
+            // 未公開はネタバレ防止サムネを出す
             const mystery = el('div', { class: 'mystery-thumb' }, [
               el('div', { class: 'q', text: '？？？' })
             ]);
@@ -1089,21 +1637,74 @@
       announceName.textContent = prize.name;
       announceDesc.textContent = prize.desc || '';
       announceMsg.textContent = '当選おめでとう！';
-      if (prize.img) { announceImg.src = prize.img; } else { announceImg.removeAttribute('src'); }
-      announceEl.classList.add('show'); announceEl.setAttribute('aria-hidden', 'false');
+      if (prize.img) {
+        announceImg.src = prize.img;
+      } else {
+        announceImg.removeAttribute('src');
+      }
+      announceEl.classList.add('show');
+      announceEl.setAttribute('aria-hidden', 'false');
 
       // ★ ここで公開フラグを立てる
       const arr = loadPrizes();
       const i = arr.findIndex(x => x.id === prize.id);
-      if (i > -1) { arr[i].revealed = true; savePrizes(arr); }
+      if (i > -1) {
+        arr[i].revealed = true;
+        savePrizes(arr);
+      }
 
+      // 入力欄リセット
+      winnerNameInput.value = '';
+      winnerStatus.textContent = '';
       // 履歴に記録
-      pushHist({ ts: Date.now(), num: lastDecided, id: prize.id, name: prize.name, desc: prize.desc || '', img: prize.img || '' });
+      currentHistIndex = pushHist({
+        ts: Date.now(),
+        num: lastDecided,
+        id: prize.id,
+        name: prize.name,
+        desc: prize.desc || '',
+        img: prize.img || '',
+        winner: '' // 初期は空
+      });
     }
-    function hideAnnouncement() { announceEl.classList.remove('show'); announceEl.setAttribute('aria-hidden', 'true'); }
-    announceEl.addEventListener('click', hideAnnouncement);
-    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideAnnouncement(); });
+    winnerSaveBtn.addEventListener('click', () => {
+      if (currentHistIndex == null) {
+        alert('直近の当選情報が見つかりません。');
+        return;
+      }
 
+      const name = winnerNameInput.value.trim();
+      const arr = loadHist();
+
+      if (!arr[currentHistIndex]) {
+        alert('履歴データが見つかりません。');
+        return;
+      }
+
+      arr[currentHistIndex].winner = name;
+      saveHist(arr);
+      renderHist();
+
+      winnerStatus.textContent = name
+        ? `「${name}」として記録しました。`
+        : '獲得者なしで記録しました。';
+    });
+
+    function hideAnnouncement() {
+      announceEl.classList.remove('show');
+      announceEl.setAttribute('aria-hidden', 'true');
+    }
+
+    // ★ 背景（overlay 自体）をクリックしたときだけ閉じる
+    announceEl.addEventListener('click', (e) => {
+      if (e.target === announceEl) {
+        hideAnnouncement();
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') hideAnnouncement();
+    });
     /* ===== btnBingo の安全バインド（提案①：remove→add） ===== */
     function onBingoClick() { openPicker(); }
     function bindBingo() {
@@ -1128,6 +1729,7 @@
     /* 初期描画（最後に） */
     renderPrizeList();
     renderHist();
+    initBgmControls();   // ★ これを追加
 
   </script>
 </body>
