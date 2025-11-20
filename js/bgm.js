@@ -162,7 +162,7 @@ const MetalSound = (() => {
         play();
     }
 
-    // UI 同期用（後でフックを渡す）
+    // UI 同期用
     let uiSyncHandlers = [];
 
     function registerUISync(handler) {
@@ -190,7 +190,7 @@ const MetalSound = (() => {
     };
 })();
 
-// ===== BGM コントロール初期化 =====
+// BGM コントロール初期化
 function initBgmControls() {
     const sel = document.getElementById('bgmTrack');
     const btnPlay = document.getElementById('bgmPlay');
@@ -265,10 +265,9 @@ const RollSound = (() => {
 
     function start() {
         if (!audio) {
-            // 好きなロール用SEファイルに変えてOK
             audio = new Audio("Audio/res.mp3");
             audio.loop = true;
-            audio.volume = 0.7;
+            audio.volume = 0.5;
         }
         audio.currentTime = 0;
         audio.play().catch(err => console.warn("ロール音再生エラー:", err));
@@ -289,9 +288,8 @@ const ConfirmSound = (() => {
 
     function play() {
         if (!audio) {
-            // ★確定SEのファイル名は好きなのに差し替え
             audio = new Audio("Audio/pon.mp3");
-            audio.volume = 1.0;
+            audio.volume = 0.5;
         }
         audio.currentTime = 0;
         audio.play().catch(err => console.warn("確定SE再生エラー:", err));
@@ -299,10 +297,11 @@ const ConfirmSound = (() => {
 
     return { play };
 })();
-// BGMを0から targetVolume までdurationミリ秒でフェードイン
+
+// BGMを0からtargetVolume までdurationミリ秒でフェードイン
 function fadeInBgmToCurrentVolume(duration = 3000) {
     const state = MetalSound.getState();
-    const targetVolume = state.volume; // スライダーの値(例:0.1)
+    const targetVolume = state.volume;
 
     // 完全ミュート指定ならそのまま再生だけして終わり
     if (targetVolume <= 0) {
@@ -311,15 +310,14 @@ function fadeInBgmToCurrentVolume(duration = 3000) {
         return;
     }
 
-    // まず音量0で再生開始（続きから）
     MetalSound.setVolume(0);
-    MetalSound.start();  // play() 相当。位置は pause 時のまま
+    MetalSound.start();
 
     const startTime = performance.now();
 
     function step(now) {
         const elapsed = now - startTime;
-        const t = Math.min(elapsed / duration, 1); // 0〜1
+        const t = Math.min(elapsed / duration, 1);
         const v = targetVolume * t;
         MetalSound.setVolume(v);
 
@@ -336,7 +334,36 @@ const GameStartSE = (() => {
 
     function play() {
         if (!audio) {
-            audio = new Audio("Audio/SE3.mp3"); // 好きなSEファイル名に
+            audio = new Audio("Audio/SE3.mp3");
+            audio.volume = 0.1;
+        }
+        audio.currentTime = 0;
+        audio.play().catch(err => console.warn("GAME START SE 再生エラー:", err));
+    }
+
+    return { play };
+})();
+
+// BINGOSE
+const BINGOSE = (() => {
+    let audio;
+
+    function play() {
+        if (!audio) {
+            const tracks = [
+                { id: '1', title: '1', file: 'Audio/イェイ1.mp3' },
+                { id: '2', title: '2', file: 'Audio/イェイ2.mp3' },
+                { id: '3', title: '3', file: 'Audio/イェイ3.mp3' },
+                { id: '4', title: '4', file: 'Audio/イェイ4.mp3' },
+                { id: '5', title: '5', file: 'Audio/イェイ5.mp3' },
+                { id: '6', title: '6', file: 'Audio/イェイ6.mp3' },
+                { id: '7', title: '7', file: 'Audio/イェイ7.mp3' },
+                { id: '8', title: '8', file: 'Audio/イェイ8.mp3' }
+            ]
+            //ランダムで1曲を決定
+            let idx = Math.floor(Math.random() * 8) + 1
+            const src = tracks[idx].file;
+            audio = new Audio(src);
             audio.volume = 0.1;
         }
         audio.currentTime = 0;

@@ -1,4 +1,4 @@
-/* ===== 景品登録＋選択発表＋履歴 ===== */
+// 景品登録＋選択発表＋履歴
 const MAX_PRIZES = 30;
 const PRIZE_KEY = 'metalingo_prizes_v1';
 const PRIZE_HIST_KEY = 'metalingo_prize_history_v1';
@@ -38,13 +38,13 @@ const histClear = document.getElementById('histClear');
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
 function fmtTime(ts) { const d = new Date(ts); return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`; }
 
-// storage
+// ストレージ
 function loadPrizes() { try { return JSON.parse(localStorage.getItem(PRIZE_KEY) || '[]'); } catch { return []; } }
 function savePrizes(arr) { localStorage.setItem(PRIZE_KEY, JSON.stringify(arr)); }
 function loadHist() { try { return JSON.parse(localStorage.getItem(PRIZE_HIST_KEY) || '[]'); } catch { return []; } }
 function saveHist(arr) { localStorage.setItem(PRIZE_HIST_KEY, JSON.stringify(arr)); }
 
-// 安全要素生成（XSS軽減）
+// 安全要素生成
 function el(tag, props = {}, children = []) {
     const d = document.createElement(tag);
     for (const [k, v] of Object.entries(props)) {
@@ -254,7 +254,12 @@ function openPicker() {
 
             const choose = el('button', { class: 'btn' });
             choose.textContent = 'この景品を発表';
-            choose.addEventListener('click', () => showAnnouncement(p));
+            choose.addEventListener('click', () => {
+                //おめでとうサウンドの追加
+                BINGOSE.play();
+
+                showAnnouncement(p)
+            });
 
             const bodyKids = hint ? [name, desc, hint] : [name, desc];
             const body = el('div', { class: 'body' }, [...bodyKids, el('div', { class: 'row' }, [choose])]);
@@ -332,6 +337,8 @@ winnerSaveBtn.addEventListener('click', () => {
     winnerStatus.textContent = name
         ? `「${name}」として記録しました。`
         : '獲得者なしで記録しました。';
+
+    hideAnnouncement();
 });
 
 function hideAnnouncement() {
@@ -339,7 +346,7 @@ function hideAnnouncement() {
     announceEl.setAttribute('aria-hidden', 'true');
 }
 
-// ★ 背景（overlay 自体）をクリックしたときだけ閉じる
+// 背景（overlay 自体）をクリックしたときだけ閉じる
 announceEl.addEventListener('click', (e) => {
     if (e.target === announceEl) {
         hideAnnouncement();
@@ -349,7 +356,7 @@ announceEl.addEventListener('click', (e) => {
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') hideAnnouncement();
 });
-/* ===== btnBingo の安全バインド（提案①：remove→add） ===== */
+// btnBingo の安全バインド
 function onBingoClick() { openPicker(); }
 function bindBingo() {
     const el = document.getElementById('btnBingo'); if (!el) return;
@@ -357,7 +364,7 @@ function bindBingo() {
     el.addEventListener('click', onBingoClick, { passive: true });
 }
 
-/* 画像公開リセット機能実装*/
+// 画像公開リセット機能実装
 const pzRevealReset = document.getElementById('pzRevealReset');
 pzRevealReset.addEventListener('click', () => {
     if (!confirm('すべての景品の「公開済み」状態をリセットします。よろしい？')) return;

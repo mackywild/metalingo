@@ -168,7 +168,7 @@ btnStartStop.addEventListener('click', () => {
 
         isRolling = true;
     } else {
-        // === ストップ・決定 ===
+        // ストップ・決定
         clearInterval(rollTimer);
         rollTimer = null;
 
@@ -180,12 +180,11 @@ btnStartStop.addEventListener('click', () => {
 
         // ロール前にBGMが鳴っていた場合のみ復帰処理
         if (bgmWasPlayingBeforeRoll) {
-            // ② BGMは続きから3秒フェードイン
+            // BGMは続きから3秒フェードイン
             fadeInBgmToCurrentVolume(3000);
         }
         bgmWasPlayingBeforeRoll = false;
 
-        // ※この下は今まで通りでOK
         const n = Number(nowNumEl.textContent);
         lastDecided = n;
         const ri = remain.indexOf(n);
