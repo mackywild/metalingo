@@ -4,10 +4,12 @@ const MetalSound = (() => {
     const tracks = [
         { id: 'ALWAYS', title: 'ALWAYS', file: 'Audio/ALWAYS.mp3' },
         { id: 'Despair', title: 'Despair', file: 'Audio/Despair.mp3' },
+        { id: '灰燼に罪', title: '灰燼に罪', file: 'Audio/BlackStarCover.mp3' },
         { id: 'Energetic', title: 'Energetic', file: 'Audio/Energetic.mp3' },
         { id: 'Poison', title: 'Poison', file: 'Audio/Poison.mp3' },
         { id: 'Radiance', title: 'Radiance', file: 'Audio/Radiance.mp3' },
         { id: 'Falling', title: 'Falling', file: 'Audio/Falling.mp3' },
+        { id: '鳥合島', title: '鳥合島', file: 'Audio/BlackStarCover2.mp3' },
         { id: 'TOGETHER FOREVER', title: 'TOGETHER FOREVER', file: 'Audio/TOGETHER FOREVER.mp3' },
         { id: 'DEAR LUCIFER', title: 'DEAR LUCIFER', file: 'Audio/DEAR LUCIFER.mp3' },
         { id: 'Mi Amore', title: 'Mi Amore', file: 'Audio/Mi Amore.mp3' },
