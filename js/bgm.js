@@ -13,7 +13,8 @@ const MetalSound = (() => {
         { id: 'Mi Amore', title: 'Mi Amore', file: 'Audio/Mi Amore.mp3' },
         { id: 'FINALE', title: 'FINALE', file: 'Audio/FINALE.mp3' },
         { id: 'Stargazer', title: 'Stargazer', file: 'Audio/Stargazer.mp3' },
-        { id: 'Raincarnation', title: 'Raincarnation', file: 'Audio/Raincarnation.mp3' }
+        { id: 'Raincarnation', title: 'Raincarnation', file: 'Audio/Raincarnation.mp3' },
+        { id: 'moonGurdian', title: 'moonGurdian', file: 'Audio/moong.mp3' }
     ];
 
     let audio = null;
